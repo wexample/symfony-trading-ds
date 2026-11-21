@@ -1,0 +1,13 @@
+en:
+  label: Market chart
+  empty: No candles to show.
+  word:
+    buy: Buy
+    sell: Sell
+
+fr:
+  label: Graphique de marché
+  empty: Aucune bougie à afficher.
+  word:
+    buy: Achat
+    sell: Vente

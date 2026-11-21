@@ -1,0 +1,7 @@
+{
+  "name": "@wexample/symfony-trading-ds",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "lightweight-charts": "^5.0.0"
+  }
+}

@@ -1,0 +1,32 @@
+{#- A market chart, drawn by market-chart.ts with Lightweight Charts: candles,
+    the trades marked on them, the series drawn along — each read from the api.
+    Given a `title`, drawn in a card so titled. -#}
+{%- if title|default(null) -%}
+<section class="block block--card market-chart--card">
+    <div class="block--title">
+        <h3 class="block--title-label">{{ title }}</h3>
+    </div>
+    <div class="block--body">
+{%- endif -%}
+<div class="market-chart{% if class|default(null) %} {{ class }}{% endif %}"
+     {%- if height|default(null) %} style="--market-chart-height: {{ height }}"{% endif %}>
+    {#- The series drawn along, by name and colour, written by market-chart.ts. -#}
+    <ul class="market-chart--legend" hidden></ul>
+    <div class="market-chart--canvas"
+         role="img"
+         aria-label="{{ label|default(null) ?: '@component::label' | trans }}"
+         data-words="{{ {
+             buy: '@component::word.buy' | trans,
+             sell: '@component::word.sell' | trans,
+         }|json_encode }}"></div>
+    {#- Nothing to draw: the room the chart would have taken, held by a
+        placeholder saying so. -#}
+    <div class="market-chart--empty" hidden>
+        <span class="market-chart--empty-icon" aria-hidden="true">{{ icon('ph:bold/chart-line') }}</span>
+        <span class="market-chart--empty-text">{{ '@component::empty' | trans }}</span>
+    </div>
+</div>
+{%- if title|default(null) -%}
+    </div>
+</section>
+{%- endif -%}

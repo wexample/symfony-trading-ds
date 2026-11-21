@@ -1,0 +1,81 @@
+@use '@wexample/symfony-design-system/css/shapes/block';
+// The chart takes the width it is given and a height of its own, which a page
+// sets through --market-chart-height. Everything inside the canvas is
+// Lightweight Charts' canvas, coloured from the roles of the system by
+// market-chart.ts.
+.market-chart {
+  --market-chart-height: 28rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.market-chart--canvas {
+  width: 100%;
+  height: var(--market-chart-height);
+}
+
+// The series drawn along the candles, each by a dot of its colour.
+.market-chart--legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-color-muted);
+  font-size: var(--font-size-2);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.market-chart--legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  &::before {
+    content: '';
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--market-chart-series-color);
+  }
+}
+
+// Nothing to draw: a placeholder the chart's height, as symfony-charts-ds's
+// chart shows one — the page keeps its shape.
+.market-chart--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--market-chart-height);
+  padding: var(--space-4);
+  border: var(--border-placeholder);
+  border-radius: var(--radius-box);
+  background: var(--surface-page);
+  color: var(--text-color-subtle);
+  font-size: var(--font-size-2);
+  text-align: center;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.market-chart--empty-icon {
+  display: inline-flex;
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+@media print {
+  .market-chart {
+    break-inside: avoid;
+  }
+}

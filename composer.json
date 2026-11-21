@@ -7,5 +7,38 @@
     "psr-4": {
       "Wexample\\SymfonyTradingDs\\": "src/"
     }
+  },
+  "description": "Design-system side of symfony-trading: market charts drawn with Lightweight Charts",
+  "autoload-dev": {
+    "psr-4": {
+      "Wexample\\SymfonyTradingDs\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "weeger",
+      "email": "romain.weeger@wexample.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.5",
+    "wexample/symfony-trading": ">=1.0.1",
+    "wexample/symfony-design-system": ">=50.0.0",
+    "wexample/symfony-helpers": ">=19.3.0",
+    "wexample/symfony-loader": ">=28.0.0"
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../*",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
+  "extra": {
+    "install": {
+      "bundle_env": "all"
+    }
   }
 }
