@@ -7,7 +7,7 @@ use Twig\TwigFunction;
 use Wexample\SymfonyDesignSystem\Twig\AbstractTemplateExtension;
 
 /**
- * - `market_chart(source, { scope, title, label, height, lazy, refresh })`: a
+ * - `market_chart(source, { scope, timeframe, title, label, height, lazy, refresh })`: a
  *   market's candles drawn by Lightweight Charts, the trades marked on them
  *   and the series drawn along, all three read from the api as the layers of
  *   the market chart `source` (symfony-trading's MarketChartProviderInterface).
@@ -40,6 +40,8 @@ class MarketChartExtension extends AbstractTemplateExtension
                             'source' => $source,
                             // What the chart is about, by its id, for the provider.
                             'scope' => isset($options['scope']) ? (string) $options['scope'] : null,
+                            // The width of its candles, for a provider offering several.
+                            'timeframe' => $options['timeframe'] ?? null,
                             // False to draw at once rather than when scrolled to.
                             'lazy' => (bool) ($options['lazy'] ?? true),
                             // The events of the page after which its layers are read again.

@@ -21,6 +21,8 @@ type MarketChartOptions = {
   source: string;
   // What the chart is about, by its id, for the provider.
   scope: string | null;
+  // The width of its candles, for a provider offering several.
+  timeframe: string | null;
   lazy: boolean;
   // The events of the page after which its layers are read again.
   refresh: string[];
@@ -118,7 +120,11 @@ export default class extends Component {
   // chart.
   private async read(): Promise<void> {
     const client = (this.app.getService('api') as any).client;
-    const query = { chart: this.options.source, ...(this.options.scope ? { scope: this.options.scope } : {}) };
+    const query = {
+      chart: this.options.source,
+      ...(this.options.scope ? { scope: this.options.scope } : {}),
+      ...(this.options.timeframe ? { timeframe: this.options.timeframe } : {}),
+    };
     const [candles, markers, points] = await Promise.all(
       ['candle', 'tradeMarker', 'timeSeriesPoint'].map((name) => client.getRepository(name).fetchList({ query }) as Promise<any[]>)
     );
@@ -205,7 +211,9 @@ export default class extends Component {
       grid: { vertLines: { color: theme.line }, horzLines: { color: theme.line } },
       crosshair: { mode: CrosshairMode.Normal },
       rightPriceScale: { borderColor: theme.line },
-      timeScale: { borderColor: theme.line, timeVisible: true, secondsVisible: false },
+      // Down to a tenth of a pixel a candle: the whole of thousands of them
+      // fits the width when the chart opens, and zooming in shows them apart.
+      timeScale: { borderColor: theme.line, timeVisible: true, secondsVisible: false, minBarSpacing: 0.1 },
     });
 
     this.drawCandles(theme);

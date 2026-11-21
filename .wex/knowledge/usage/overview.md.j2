@@ -15,6 +15,7 @@ The drawing side of `symfony-trading`: the market chart, drawn by [Lightweight C
 | Option | |
 |---|---|
 | `scope` | what the chart is about, by its id, sent to the provider |
+| `timeframe` | the width of the candles, for a provider offering several |
 | `title` | drawn in a card so titled; none without it |
 | `label` | its words for whoever cannot see it; the title by default |
 | `height` | the height of the drawing, `28rem` by default (`--market-chart-height`) |
