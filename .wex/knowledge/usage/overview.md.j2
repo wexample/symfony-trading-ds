@@ -4,13 +4,13 @@ The drawing side of `symfony-trading`: the market chart, drawn by [Lightweight C
 
 ## A market chart
 
-```twig
+{% raw %}```twig
 {{ market_chart('trial-market', {
     scope: trial.id,
     title: 'Price, trades and equity',
     lazy: false,
 }) }}
-```
+```{% endraw %}
 
 | Option | |
 |---|---|
