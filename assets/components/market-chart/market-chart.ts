@@ -78,8 +78,14 @@ export default class extends Component {
     }
 
     this.words = { ...this.words, ...JSON.parse(canvas.dataset.words || '{}') };
-    // Sized by the canvas, which CSS sizes: followed as it changes.
-    this.chart = createChart(canvas, { autoSize: true });
+    // Sized by the canvas, which CSS sizes: followed as it changes. The wheel
+    // left to the page, which a chart among others must not stop scrolling:
+    // the range is moved by dragging, zoomed on the axes.
+    this.chart = createChart(canvas, {
+      autoSize: true,
+      handleScroll: { mouseWheel: false },
+      handleScale: { mouseWheel: false },
+    });
     // A colour scheme, a palette or a skin switched: drawn again in its colours.
     this.app.services.events.listen(AssetsServiceEvents.USAGE_CHANGE, this.onUsageChange);
     this.options.refresh?.forEach((event) => this.app.services.events.listen(event, this.onRefresh));
