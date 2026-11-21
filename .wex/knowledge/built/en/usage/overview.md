@@ -1,0 +1,30 @@
+## What this package holds
+
+The drawing side of `symfony-trading`: the market chart, drawn by [Lightweight Charts](https://github.com/tradingview/lightweight-charts) (TradingView, Apache 2.0) from the three layers a `MarketChartProviderInterface` serves. Analytical charts — a heatmap, a distribution — stay with ECharts in `symfony-charts-ds`: each library on its own ground.
+
+## A market chart
+
+```twig
+{{ market_chart('trial-market', {
+    scope: trial.id,
+    title: 'Price, trades and equity',
+    lazy: false,
+}) }}
+```
+
+| Option | |
+|---|---|
+| `scope` | what the chart is about, by its id, sent to the provider |
+| `title` | drawn in a card so titled; none without it |
+| `label` | its words for whoever cannot see it; the title by default |
+| `height` | the height of the drawing, `28rem` by default (`--market-chart-height`) |
+| `lazy` | false to draw at once rather than when scrolled to |
+| `refresh` | the events of the page after which its layers are read again |
+
+The component reads the candles, the trade markers and the series points through their generated repositories, in parallel: the app's api client must register `symfony-trading`'s `generatedRepositories` and `generatedEntitySchemas`.
+
+Colours come from the roles of the design system — the candles and closing markers in `--success-9` / `--error-9`, an opening marker and a series without colour in the accent, a series with one in its `--cat-<name>-9` — and follow a switch of colour scheme. The series drawn along are named in a legend above the drawing.
+
+## Installing
+
+The app depends on `lightweight-charts` (`^5`), which the component imports: `yarn add lightweight-charts`. Its default attribution logo is kept, as its licence asks.
