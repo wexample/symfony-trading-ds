@@ -1,6 +1,6 @@
 # symfony-trading-ds
 
-Version: 2.0.1
+Version: 2.0.2
 
 Design-system side of symfony-trading: market charts drawn with Lightweight Charts
 
